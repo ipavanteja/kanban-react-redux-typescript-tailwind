@@ -8,22 +8,22 @@ import React, {
 } from "react";
 
 // Context to manage dropdown state
-interface DropdownContextProps {
+type DropdownContextProps = {
   isOpen: boolean;
   openDropdown: () => void;
   closeDropdown: () => void;
-}
+};
 
 const DropdownContext = createContext<DropdownContextProps | undefined>(
   undefined
 );
 
 // Dropdown Component (Provider)
-interface DropdownProps {
+type DropdownProps = {
   children: ReactNode;
-}
+};
 
-export const Dropdown: React.FC<DropdownProps> = ({ children }) => {
+export const Dropdown = ({ children }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
@@ -57,10 +57,13 @@ export const Dropdown: React.FC<DropdownProps> = ({ children }) => {
 };
 
 // Trigger Component
-export const DropdownTrigger: React.FC<{
+export const DropdownTrigger = ({
+  className,
+  children,
+}: {
   className?: string;
   children: ReactNode;
-}> = ({ className, children }) => {
+}) => {
   const context = useContext(DropdownContext);
   if (!context)
     throw new Error("DropdownTrigger must be used within a Dropdown");
@@ -75,10 +78,13 @@ export const DropdownTrigger: React.FC<{
 };
 
 // Content Component
-export const DropdownContent: React.FC<{
+export const DropdownContent = ({
+  className,
+  children,
+}: {
   className?: string;
   children: ReactNode;
-}> = ({ className, children }) => {
+}) => {
   const context = useContext(DropdownContext);
   if (!context)
     throw new Error("DropdownContent must be used within a Dropdown");
@@ -101,10 +107,13 @@ export const DropdownContent: React.FC<{
 };
 
 // Item Component
-export const DropdownItem: React.FC<{
+export const DropdownItem = ({
+  children,
+  onClick,
+}: {
   children: ReactNode;
   onClick?: () => void;
-}> = ({ children, onClick }) => {
+}) => {
   return (
     <div
       onClick={onClick}
@@ -116,9 +125,7 @@ export const DropdownItem: React.FC<{
 };
 
 // Label Component
-export const DropdownLabel: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
+export const DropdownLabel = ({ children }: { children: ReactNode }) => {
   return (
     <div className="px-4 py-2 text-sm font-semibold text-gray-900">
       {children}
@@ -127,6 +134,6 @@ export const DropdownLabel: React.FC<{ children: ReactNode }> = ({
 };
 
 // Separator Component
-export const DropdownSeparator: React.FC = () => {
+export const DropdownSeparator = () => {
   return <div className="border-t border-gray-200 my-1" />;
 };

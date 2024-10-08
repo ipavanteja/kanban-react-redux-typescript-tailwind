@@ -3,7 +3,18 @@ import React from "react";
 import { CalendarCheck } from "lucide-react";
 import TodoMenuDropdown from "./TodoMenuDropdown";
 
-const Todo = ({ todo }) => {
+type TodoProps = {
+  todo: {
+    id: string;
+    title: string;
+    text: string;
+    imageURL?: string;
+    date: string;
+    property: string;
+  };
+};
+
+const Todo = ({ todo }: TodoProps) => {
   return (
     <div className="bg-white shadow-md p-4 rounded-md hover:shadow-lg cursor-pointer">
       <div className="flex items-center justify-between">

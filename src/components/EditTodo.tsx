@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { Plus } from "lucide-react";
-
-import { addTodo } from "../store/todo/todoSlice";
+import { editTodo } from "../store/todo/todoSlice";
 
 import {
   Select,
@@ -28,16 +26,23 @@ import {
 import { Input } from "./ui/Input";
 import { Label } from "./ui/Label";
 
-type AddTodoProps = {
-  listId: string;
+type EditTodoProps = {
+  todo: {
+    id: string;
+    title: string;
+    text: string;
+    imageURL?: string;
+    property: string;
+    date: string;
+  };
 };
 
-const AddTodo = ({ listId }: AddTodoProps) => {
-  const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
-  const [imageURL, setImageURL] = useState("");
-  const [property, setProperty] = useState("");
-  const [date, setDate] = useState("");
+const EditTodo = ({ todo }: EditTodoProps) => {
+  const [title, setTitle] = useState(todo.title || "");
+  const [text, setText] = useState(todo.text || "");
+  const [imageURL, setImageURL] = useState(todo.imageURL || "");
+  const [property, setProperty] = useState(todo.property || "");
+  const [date, setDate] = useState(todo.date || "");
 
   const dispatch = useDispatch();
 
@@ -45,11 +50,11 @@ const AddTodo = ({ listId }: AddTodoProps) => {
     setProperty(value);
   };
 
-  const handleAddTodo = () => {
+  const handleEditTodo = () => {
     if (title.trim() && text.trim()) {
       dispatch(
-        addTodo({
-          listId,
+        editTodo({
+          id: todo.id,
           title,
           text,
           imageURL,
@@ -57,23 +62,18 @@ const AddTodo = ({ listId }: AddTodoProps) => {
           date,
         })
       );
-      setTitle("");
-      setText("");
-      setImageURL("");
-      setProperty("");
-      setDate("");
     }
   };
 
   return (
     <Modal>
       <ModalTrigger>
-        <Plus className="w-4 h-4 text-gray-500 hover:text-[#5d87ff]" />
+        <p>Edit</p>
       </ModalTrigger>
 
       <ModalContent>
         <ModalHeader>
-          <ModalTitle className="text-xl font-semibold">Add Task</ModalTitle>
+          <ModalTitle className="text-xl font-semibold">Edit Task</ModalTitle>
         </ModalHeader>
         <div>
           <div className="mt-4">
@@ -109,8 +109,11 @@ const AddTodo = ({ listId }: AddTodoProps) => {
               <div>
                 <Label className="mb-1 text-sm">Task Property *</Label>
                 <Select onSelect={handlePropertySelect}>
-                  <SelectTrigger className="w-[250px]">
-                    <SelectValue placeholder="Select Task Property" />
+                  <SelectTrigger className="w-[220px]">
+                    <SelectValue
+                      value={property}
+                      placeholder="Select Task Property"
+                    />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
@@ -140,12 +143,12 @@ const AddTodo = ({ listId }: AddTodoProps) => {
         <ModalFooter>
           <ModalClose>Close</ModalClose>
           <ModalSubmit
-            onClick={handleAddTodo}
+            onClick={handleEditTodo}
             disabled={
               title && text && imageURL && property && imageURL ? false : true
             }
           >
-            Add Todo
+            Save Changes
           </ModalSubmit>
         </ModalFooter>
       </ModalContent>
@@ -153,4 +156,4 @@ const AddTodo = ({ listId }: AddTodoProps) => {
   );
 };
 
-export default AddTodo;
+export default EditTodo;

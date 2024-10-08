@@ -2,7 +2,6 @@ import React from "react";
 import { useDispatch } from "react-redux";
 
 import { deleteTodo } from "../store/todo/todoSlice";
-import { editList, deleteList } from "../store/list/listSlice";
 
 import {
   Dropdown,
@@ -12,7 +11,20 @@ import {
 } from "./ui/Dropdown";
 import { EllipsisVertical, Pencil, Trash2 } from "lucide-react";
 
-const TodoMenuDropdown = ({ todo }) => {
+import EditTodo from "./EditTodo";
+
+type TodoMenuDropdownProps = {
+  todo: {
+    id: string;
+    title: string;
+    text: string;
+    imageURL?: string;
+    date: string;
+    property: string;
+  };
+};
+
+const TodoMenuDropdown = ({ todo }: TodoMenuDropdownProps) => {
   const dispatch = useDispatch();
 
   const handleDeleteTodo = () => {
@@ -26,10 +38,12 @@ const TodoMenuDropdown = ({ todo }) => {
           <EllipsisVertical className="w-4 h-4 text-gray-500 hover:text-[#5d87ff]" />
         </DropdownTrigger>
         <DropdownContent className="w-24">
-          <DropdownItem onClick={() => console.log("Edit clicked")}>
+          <DropdownItem>
             <div className="flex items-center gap-2">
               <Pencil className="w-4 h-4" />
-              <span>Edit</span>
+              <span>
+                <EditTodo todo={todo} />
+              </span>
             </div>
           </DropdownItem>
           <DropdownItem onClick={handleDeleteTodo}>

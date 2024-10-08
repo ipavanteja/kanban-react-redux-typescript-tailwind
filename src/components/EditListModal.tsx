@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
-import { RootState } from "../store/store";
 import { editList } from "../store/list/listSlice";
-import { toggleEditListModal } from "../store/modal/modalSlice";
 
 import {
   Modal,
@@ -17,24 +15,19 @@ import {
 } from "./ui/Modal";
 import { Input } from "./ui/Input";
 import { Label } from "./ui/Label";
-import Button from "./ui/Button";
 
-const EditListModal = ({ list }) => {
+type EditListModalProps = {
+  list: { id: string; title: string };
+};
+
+const EditListModal = ({ list }: EditListModalProps) => {
   const dispatch = useDispatch();
-  const isEditListModalOpen = useSelector(
-    (state: RootState) => state.editModal.isOpen
-  );
   const [listName, setListName] = useState(list.title);
 
   const handleEditList = () => {
     if (listName.trim()) {
       dispatch(editList({ id: list.id, title: listName }));
-      dispatch(toggleEditListModal());
     }
-  };
-
-  const onClose = () => {
-    dispatch(toggleEditListModal());
   };
 
   return (
@@ -57,7 +50,7 @@ const EditListModal = ({ list }) => {
             />
           </div>
           <ModalFooter>
-            <ModalClose onClick={onClose}>Close</ModalClose>
+            <ModalClose>Close</ModalClose>
             <ModalSubmit onClick={handleEditList} disabled={!listName.trim()}>
               Save
             </ModalSubmit>

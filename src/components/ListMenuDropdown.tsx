@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useDispatch } from "react-redux";
 
 import { deleteList } from "../store/list/listSlice";
-import { toggleEditListModal } from "../store/modal/modalSlice";
 
 import {
   Dropdown,
@@ -12,25 +11,16 @@ import {
 } from "./ui/Dropdown";
 import { EllipsisVertical } from "lucide-react";
 import EditListModal from "./EditListModal";
-import { RootState } from "../store/store";
 
-const ListMenuDropdown = ({ list }) => {
+type ListMenuDropdownProps = {
+  list: { id: string; title: string; bgColor?: string; isDefault: boolean };
+};
+
+const ListMenuDropdown = ({ list }: ListMenuDropdownProps) => {
   const dispatch = useDispatch();
 
-  const isEditListModalOpen = useSelector(
-    (state: RootState) => state.editModal.isOpen
-  );
-
-  console.log(isEditListModalOpen);
-
   const handleDeleteList = () => {
-    if (window.confirm("Are you sure you want to delete this list?")) {
-      dispatch(deleteList(list.id));
-    }
-  };
-
-  const handleEditListModalOpen = () => {
-    dispatch(toggleEditListModal());
+    dispatch(deleteList(list.id));
   };
 
   return (
@@ -49,7 +39,6 @@ const ListMenuDropdown = ({ list }) => {
           </DropdownItem>
         </DropdownContent>
       </Dropdown>
-      {/* {isEditListModalOpen && <EditListModal list={list} />} */}
     </div>
   );
 };

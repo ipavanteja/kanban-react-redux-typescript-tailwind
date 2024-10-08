@@ -1,13 +1,13 @@
 import React from "react";
 
-interface LabelProps {
+type LabelProps = {
   htmlFor?: string; // To associate the label with a form field
   children: React.ReactNode; // The label text or child components
   color?: "default" | "primary" | "secondary" | "error"; // Color options
   align?: "left" | "center" | "right"; // Text alignment
   required?: boolean; // If the label is for a required field
   className?: string; // To accept custom styles
-}
+};
 
 // Base classes for different colors
 const colorClasses = {
@@ -24,14 +24,14 @@ const alignClasses = {
   right: "text-right",
 };
 
-export const Label: React.FC<LabelProps> = ({
+export const Label = ({
   htmlFor,
   children,
   color = "default",
   align = "left",
   required = false,
   className = "",
-}) => {
+}: LabelProps) => {
   return (
     <label
       htmlFor={htmlFor}

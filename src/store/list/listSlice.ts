@@ -1,21 +1,27 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface ListState {
+type ListState = {
   id: string;
   title: string;
+  bgColor?: string;
   isDefault: boolean;
-}
+};
 
-interface ListsState {
+type ListsState = {
   lists: ListState[];
-}
+};
 
 const initialState: ListsState = {
   lists: [
-    { id: "list-1", title: "To Do", isDefault: true },
-    { id: "list-2", title: "In Progress", isDefault: false },
-    { id: "list-3", title: "Review", isDefault: false },
-    { id: "list-4", title: "Done", isDefault: false },
+    { id: "list-1", title: "To Do", bgColor: "#ecf2ff", isDefault: true },
+    {
+      id: "list-2",
+      title: "In Progress",
+      bgColor: "#e8f7ff",
+      isDefault: false,
+    },
+    { id: "list-3", title: "Review", bgColor: "#fef5e5", isDefault: false },
+    { id: "list-4", title: "Done", bgColor: "#e6fffa", isDefault: false },
   ],
 };
 

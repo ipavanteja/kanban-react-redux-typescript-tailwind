@@ -1,12 +1,12 @@
 import React from "react";
 
-interface ButtonProps {
+type ButtonProps = {
   children: React.ReactNode;
   variant?: "primary" | "secondary" | "outline" | "danger";
   onClick?: () => void;
   disabled?: boolean;
   className?: string;
-}
+};
 
 const baseStyles =
   "py-1 leading-7 px-4 rounded-md focus:outline-none transition ease-in-out duration-200";
@@ -19,13 +19,13 @@ const variantStyles = {
   danger: "bg-red-500 text-white hover:shadow-md focus:ring-red-300",
 };
 
-const Button: React.FC<ButtonProps> = ({
+const Button = ({
   children,
   variant = "primary",
   onClick,
   disabled = false,
   className = "",
-}) => {
+}: ButtonProps) => {
   const combinedClasses = `${baseStyles} ${variantStyles[variant]} ${
     disabled ? "opacity-50 cursor-not-allowed" : ""
   } ${className}`;

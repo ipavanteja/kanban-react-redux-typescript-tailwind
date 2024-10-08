@@ -15,13 +15,13 @@ const variantClasses = {
   filled: "bg-gray-100 text-gray-900",
 };
 
-export const Input: React.FC<InputProps> = ({
+export const Input = ({
   variant = "default",
   error,
   fullWidth = false,
   className,
   ...props
-}) => {
+}: InputProps) => {
   return (
     <div className={`${fullWidth ? "w-full" : "w-auto"} mb-4`}>
       <input

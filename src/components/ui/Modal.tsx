@@ -2,20 +2,20 @@ import React, { createContext, useContext, useState, ReactNode } from "react";
 import ReactDOM from "react-dom";
 
 // Context to manage modal open/close state
-interface ModalContextProps {
+type ModalContextProps = {
   isOpen: boolean;
   openModal: () => void;
   closeModal: () => void;
-}
+};
 
 const ModalContext = createContext<ModalContextProps | undefined>(undefined);
 
 // Main Modal Component (Provider)
-interface ModalProps {
+type ModalProps = {
   children: ReactNode;
-}
+};
 
-export const Modal: React.FC<ModalProps> = ({ children }) => {
+export const Modal = ({ children }: ModalProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => setIsOpen(true);
@@ -29,9 +29,7 @@ export const Modal: React.FC<ModalProps> = ({ children }) => {
 };
 
 // Trigger Component
-export const ModalTrigger: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
+export const ModalTrigger = ({ children }: { children: ReactNode }) => {
   const context = useContext(ModalContext);
   if (!context) throw new Error("ModalTrigger must be used within a Modal");
 
@@ -45,10 +43,13 @@ export const ModalTrigger: React.FC<{ children: ReactNode }> = ({
 };
 
 // Content Component
-export const ModalContent: React.FC<{
+export const ModalContent = ({
+  children,
+  className,
+}: {
   className?: string;
   children: ReactNode;
-}> = ({ children, className }) => {
+}) => {
   const context = useContext(ModalContext);
   if (!context) throw new Error("ModalContent must be used within a Modal");
 
@@ -80,41 +81,53 @@ export const ModalContent: React.FC<{
 };
 
 // Additional Structured Components (Header, Title, Description)
-export const ModalHeader: React.FC<{
+export const ModalHeader = ({
+  children,
+  className,
+}: {
   className?: string;
   children: ReactNode;
-}> = ({ children, className }) => (
-  <div className={`${className}`}>{children}</div>
-);
+}) => <div className={`${className}`}>{children}</div>;
 
-export const ModalTitle: React.FC<{
+export const ModalTitle = ({
+  children,
+  className,
+}: {
   className?: string;
   children: ReactNode;
-}> = ({ children, className }) => (
-  <h2 className={`${className}`}>{children}</h2>
-);
+}) => <h2 className={`${className}`}>{children}</h2>;
 
-export const ModalDescription: React.FC<{
+export const ModalDescription = ({
+  children,
+  className,
+}: {
   className?: string;
   children: ReactNode;
-}> = ({ children, className }) => <p className={`${className}`}>{children}</p>;
+}) => <p className={`${className}`}>{children}</p>;
 
 // ModalFooter Component
-export const ModalFooter: React.FC<{
+export const ModalFooter = ({
+  children,
+  className,
+}: {
   className?: string;
   children: React.ReactNode;
-}> = ({ children, className }) => (
+}) => (
   <div className={`mt-6 flex justify-end space-x-2 ${className}`}>
     {children}
   </div>
 );
 
 // ModalClose Component
-export const ModalClose: React.FC<{
+export const ModalClose = ({
+  onClick,
+  children,
+  className,
+}: {
   className?: string;
   onClick?: () => void;
   children: React.ReactNode;
-}> = ({ onClick, children, className }) => {
+}) => {
   const context = useContext(ModalContext);
   if (!context) throw new Error("ModalClose must be used within a Modal");
 
@@ -138,12 +151,17 @@ export const ModalClose: React.FC<{
 };
 
 // ModalSubmit Component
-export const ModalSubmit: React.FC<{
+export const ModalSubmit = ({
+  onClick,
+  children,
+  disabled = false,
+  className,
+}: {
   className?: string;
   onClick: () => void;
   disabled?: boolean;
   children: React.ReactNode;
-}> = ({ onClick, children, disabled = false, className }) => {
+}) => {
   const context = useContext(ModalContext);
   if (!context) throw new Error("ModalSubmit must be used within a Modal");
 

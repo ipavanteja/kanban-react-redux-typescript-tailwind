@@ -9,13 +9,13 @@ import React, {
 } from "react";
 
 // Context to manage select state
-interface SelectContextProps {
+type SelectContextProps = {
   selectedValue: string;
   setSelectedValue: (value: string) => void;
   isOpen: boolean;
   openSelect: () => void;
   closeSelect: () => void;
-}
+};
 
 const SelectContext = createContext<SelectContextProps | undefined>(undefined);
 
@@ -28,12 +28,12 @@ export const useSelect = () => {
 };
 
 // Select Component (Provider)
-interface SelectProps {
+type SelectProps = {
   children: ReactNode;
   onSelect?: (value: string) => void;
-}
+};
 
-export const Select: React.FC<SelectProps> = ({ children, onSelect }) => {
+export const Select = ({ children, onSelect }: SelectProps) => {
   const [selectedValue, setSelectedValue] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef<HTMLDivElement | null>(null);
@@ -81,10 +81,13 @@ export const Select: React.FC<SelectProps> = ({ children, onSelect }) => {
 };
 
 // Trigger Component
-export const SelectTrigger: React.FC<{
+export const SelectTrigger = ({
+  className,
+  children,
+}: {
   className?: string;
   children: ReactNode;
-}> = ({ className, children }) => {
+}) => {
   const { openSelect } = useSelect();
 
   return (
@@ -98,15 +101,19 @@ export const SelectTrigger: React.FC<{
 };
 
 // Value Component
-export const SelectValue: React.FC<{ placeholder?: string }> = ({
+export const SelectValue = ({
+  value,
   placeholder,
+}: {
+  value?: string;
+  placeholder?: string;
 }) => {
   const { selectedValue } = useSelect();
   const { isOpen } = useSelect();
 
   return (
     <div className="flex items-center justify-between">
-      <span className="text-sm">{selectedValue || placeholder}</span>
+      <span className="text-sm">{value || selectedValue || placeholder}</span>
       <span>
         {isOpen ? (
           <ChevronUp className="w-4 h-4 text-gray-700" />
@@ -119,10 +126,13 @@ export const SelectValue: React.FC<{ placeholder?: string }> = ({
 };
 
 // Content Component
-export const SelectContent: React.FC<{
+export const SelectContent = ({
+  className,
+  children,
+}: {
   className?: string;
   children: ReactNode;
-}> = ({ className, children }) => {
+}) => {
   const { isOpen } = useSelect();
 
   return (
@@ -139,23 +149,22 @@ export const SelectContent: React.FC<{
 };
 
 // Group Component
-export const SelectGroup: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
+export const SelectGroup = ({ children }: { children: ReactNode }) => {
   return <div>{children}</div>;
 };
 
 // Label Component
-export const SelectLabel: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
+export const SelectLabel = ({ children }: { children: ReactNode }) => {
   return <div className="px-4 py-1 text-sm text-gray-700">{children}</div>;
 };
 
 // Item Component
-export const SelectItem: React.FC<{ value: string; children: ReactNode }> = ({
+export const SelectItem = ({
   value,
   children,
+}: {
+  value: string;
+  children: ReactNode;
 }) => {
   const { setSelectedValue, closeSelect } = useSelect();
 

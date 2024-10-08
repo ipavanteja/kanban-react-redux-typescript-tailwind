@@ -7,24 +7,22 @@ import React, {
 } from "react";
 
 // Tooltip Context
-interface TooltipContextProps {
+type TooltipContextProps = {
   isVisible: boolean;
   showTooltip: () => void;
   hideTooltip: () => void;
-}
+};
 
 const TooltipContext = createContext<TooltipContextProps | undefined>(
   undefined
 );
 
 // Tooltip Provider Component
-interface TooltipProviderProps {
+type TooltipProviderProps = {
   children: ReactNode;
-}
+};
 
-export const TooltipProvider: React.FC<TooltipProviderProps> = ({
-  children,
-}) => {
+export const TooltipProvider = ({ children }: TooltipProviderProps) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const showTooltip = () => setIsVisible(true);
@@ -67,11 +65,11 @@ const useTooltip = () => {
 };
 
 // Tooltip Trigger Component
-interface TooltipTriggerProps {
+type TooltipTriggerProps = {
   children: ReactNode;
-}
+};
 
-export const TooltipTrigger: React.FC<TooltipTriggerProps> = ({ children }) => {
+export const TooltipTrigger = ({ children }: TooltipTriggerProps) => {
   const { showTooltip, hideTooltip } = useTooltip();
 
   return (
@@ -86,17 +84,17 @@ export const TooltipTrigger: React.FC<TooltipTriggerProps> = ({ children }) => {
 };
 
 // Tooltip Content Component
-interface TooltipContentProps {
+type TooltipContentProps = {
   children: ReactNode;
   position?: "top" | "bottom" | "left" | "right";
   className?: string;
-}
+};
 
-export const TooltipContent: React.FC<TooltipContentProps> = ({
+export const TooltipContent = ({
   children,
   position = "top",
   className = "",
-}) => {
+}: TooltipContentProps) => {
   const { isVisible } = useTooltip();
 
   const positionClasses = {

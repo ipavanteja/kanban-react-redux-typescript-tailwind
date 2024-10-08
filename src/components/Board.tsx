@@ -1,6 +1,11 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import {
+  DragDropContext,
+  Droppable,
+  DraggableProvided,
+  DropResult,
+} from "react-beautiful-dnd";
 
 import { moveTodo } from "../store/todo/todoSlice";
 import { RootState } from "../store/store";
@@ -12,7 +17,7 @@ const Board = () => {
   const lists = useSelector((state: RootState) => state.lists.lists);
   const todos = useSelector((state: RootState) => state.todos.todos);
 
-  const onDragEnd = (result) => {
+  const onDragEnd = (result: DropResult): void => {
     const { destination, source, draggableId } = result;
 
     if (!destination) return;
@@ -44,7 +49,7 @@ const Board = () => {
           <div className="flex gap-5">
             {lists.map((list) => (
               <Droppable key={list.id} droppableId={list.id}>
-                {(provided) => (
+                {(provided: DraggableProvided) => (
                   <div {...provided.droppableProps} ref={provided.innerRef}>
                     <List
                       list={list}

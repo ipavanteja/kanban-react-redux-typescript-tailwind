@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface TodoState {
+type TodoState = {
   id: string;
   listId: string;
   title: string;
@@ -8,11 +8,11 @@ interface TodoState {
   imageURL: string;
   property: string;
   date: string;
-}
+};
 
-interface TodosState {
+type TodosState = {
   todos: TodoState[];
-}
+};
 
 const initialState: TodosState = {
   todos: [
