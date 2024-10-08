@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
+import ReactDOM from "react-dom";
 
 // Context to manage modal open/close state
 interface ModalContextProps {
@@ -62,7 +63,7 @@ export const ModalContent: React.FC<{
     closeModal(); // Close the modal when clicking outside
   };
 
-  return (
+  return ReactDOM.createPortal(
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
       onClick={handleClickOutside}
@@ -73,7 +74,8 @@ export const ModalContent: React.FC<{
       >
         {children}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 
@@ -110,7 +112,7 @@ export const ModalFooter: React.FC<{
 // ModalClose Component
 export const ModalClose: React.FC<{
   className?: string;
-  onClick: () => void;
+  onClick?: () => void;
   children: React.ReactNode;
 }> = ({ onClick, children, className }) => {
   const context = useContext(ModalContext);
@@ -119,7 +121,9 @@ export const ModalClose: React.FC<{
   const { closeModal } = context;
 
   const handleClick = () => {
-    onClick();
+    if (onClick) {
+      onClick();
+    }
     closeModal();
   };
 
