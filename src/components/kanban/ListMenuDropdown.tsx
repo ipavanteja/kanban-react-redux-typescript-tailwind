@@ -1,14 +1,14 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 
-import { deleteList } from "../store/list/listSlice";
+import { deleteList } from "../../store/list/listSlice";
 
 import {
   Dropdown,
   DropdownTrigger,
   DropdownContent,
   DropdownItem,
-} from "./ui/Dropdown";
+} from "../ui/Dropdown";
 import { EllipsisVertical } from "lucide-react";
 import EditListModal from "./EditListModal";
 

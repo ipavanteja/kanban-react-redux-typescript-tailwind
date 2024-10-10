@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { addList } from "../store/list/listSlice";
+import { addList } from "../../store/list/listSlice";
 
-import Button from "./ui/Button";
+import Button from "../ui/Button";
 import {
   Modal,
   ModalTrigger,
@@ -13,9 +13,9 @@ import {
   ModalFooter,
   ModalClose,
   ModalSubmit,
-} from "./ui/Modal";
-import { Input } from "./ui/Input";
-import { Label } from "./ui/Label";
+} from "../ui/Modal";
+import { Input } from "../ui/Input";
+import { Label } from "../ui/Label";
 
 const AddListModal = () => {
   const dispatch = useDispatch();

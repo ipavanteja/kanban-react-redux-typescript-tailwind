@@ -1,14 +1,14 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 
-import { deleteTodo } from "../store/todo/todoSlice";
+import { deleteTodo } from "../../store/todo/todoSlice";
 
 import {
   Dropdown,
   DropdownTrigger,
   DropdownContent,
   DropdownItem,
-} from "./ui/Dropdown";
+} from "../ui/Dropdown";
 import { EllipsisVertical, Pencil, Trash2 } from "lucide-react";
 
 import EditTodo from "./EditTodo";

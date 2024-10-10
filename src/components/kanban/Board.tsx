@@ -7,8 +7,8 @@ import {
   DropResult,
 } from "react-beautiful-dnd";
 
-import { moveTodo } from "../store/todo/todoSlice";
-import { RootState } from "../store/store";
+import { moveTodo } from "../../store/todo/todoSlice";
+import { RootState } from "../../store/store";
 import List from "./List";
 import AddListModal from "./AddListModal";
 

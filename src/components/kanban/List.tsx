@@ -5,7 +5,7 @@ import { Draggable, DraggableProvided } from "react-beautiful-dnd";
 import AddTodo from "./AddTodo";
 import Todo from "./Todo";
 import ListMenuDropdown from "./ListMenuDropdown";
-import { TooltipProvider, TooltipTrigger, TooltipContent } from "./ui/Tooltip";
+import { TooltipProvider, TooltipTrigger, TooltipContent } from "../ui/Tooltip";
 
 type TodoType = {
   id: string;

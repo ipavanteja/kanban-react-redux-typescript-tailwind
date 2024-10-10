@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { editList } from "../store/list/listSlice";
+import { editList } from "../../store/list/listSlice";
 
 import {
   Modal,
@@ -12,9 +12,9 @@ import {
   ModalClose,
   ModalSubmit,
   ModalTrigger,
-} from "./ui/Modal";
-import { Input } from "./ui/Input";
-import { Label } from "./ui/Label";
+} from "../ui/Modal";
+import { Input } from "../ui/Input";
+import { Label } from "../ui/Label";
 
 type EditListModalProps = {
   list: { id: string; title: string };

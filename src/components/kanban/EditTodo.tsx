@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { editTodo } from "../store/todo/todoSlice";
+import { editTodo } from "../../store/todo/todoSlice";
 
 import {
   Select,
@@ -11,7 +11,7 @@ import {
   SelectItem,
   SelectLabel,
   SelectValue,
-} from "./ui/Select";
+} from "../ui/Select";
 
 import {
   Modal,
@@ -22,9 +22,9 @@ import {
   ModalFooter,
   ModalClose,
   ModalSubmit,
-} from "./ui/Modal";
-import { Input } from "./ui/Input";
-import { Label } from "./ui/Label";
+} from "../ui/Modal";
+import { Input } from "../ui/Input";
+import { Label } from "../ui/Label";
 
 type EditTodoProps = {
   todo: {
