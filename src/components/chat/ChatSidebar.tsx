@@ -66,19 +66,52 @@ const contacts = [
 
 const ChatSidebar = () => {
   return (
-    <div className="w-1/4 border-r border-gray-200 p-4 bg-white h-screen flex flex-col">
-      <div className="flex items-center gap-3 mb-6">
-        <img
-          src="	https://modernize-react.adminmart.com/assets/user-1-6d05e3ce.jpg"
-          alt="Image"
-          className="w-14 h-14 rounded-full"
-        />
-        <div>
-          <h2 className="font-medium">John Deo</h2>
-          <p className="text-sm text-gray-500">Marketing Manager</p>
+    <>
+      <style>
+        {`
+          /* Initially hide the scrollbar */
+          ::-webkit-scrollbar {
+            width: 0;
+            background: transparent;
+          }
+
+          /* Show the scrollbar on hover or scroll */
+          .scrollbar:hover::-webkit-scrollbar {
+            width: 6px;
+            
+          }
+
+          .scrollbar::-webkit-scrollbar-thumb {
+            background-color: #f1f1f1;
+            border-radius: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+          }
+
+          .scrollbar:hover::-webkit-scrollbar-thumb,
+          .scrollbar:active::-webkit-scrollbar-thumb {
+            opacity: 1;
+          }
+
+          .scrollbar::-webkit-scrollbar-track {
+            background-color: #ffffff;
+          }
+        `}
+      </style>
+
+      <div className="w-1/4 border-r border-gray-200 p-4 bg-white h-screen flex flex-col">
+        <div className="flex items-center gap-3 mb-6">
+          <img
+            src="	https://modernize-react.adminmart.com/assets/user-1-6d05e3ce.jpg"
+            alt="Image"
+            className="w-14 h-14 rounded-full"
+          />
+          <div>
+            <h2 className="font-medium">John Deo</h2>
+            <p className="text-sm text-gray-500">Marketing Manager</p>
+          </div>
         </div>
-      </div>
-      <div>
+
         {/* Search Field */}
         <div className="relative mb-6">
           <input
@@ -92,19 +125,17 @@ const ChatSidebar = () => {
         </div>
         {/* Contact List */}
         <h2 className="text-lg font-semibold mb-4">Recent Charts</h2>
-        <div className="flex-1 overflow-y-auto space-y-4 ">
+        <div className="flex-1 overflow-y-auto space-y-4 scrollbar">
           {contacts.map((contact, index) => (
             <div
               key={index}
               className="p-2 flex items-center hover:bg-gray-100 rounded-lg cursor-pointer"
             >
-              <div>
-                <img
-                  src={contact.avatar}
-                  alt={contact.name}
-                  className="w-10 h-10 rounded-full mr-4"
-                />
-              </div>
+              <img
+                src={contact.avatar}
+                alt={contact.name}
+                className="w-10 h-10 rounded-full mr-4"
+              />
               <div className="flex-1">
                 <div className="flex justify-between">
                   <p className="font-medium"> {contact.name} </p>
@@ -116,7 +147,7 @@ const ChatSidebar = () => {
           ))}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

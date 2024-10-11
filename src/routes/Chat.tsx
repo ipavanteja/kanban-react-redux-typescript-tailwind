@@ -1,7 +1,6 @@
 import React from "react";
 import ChatSidebar from "../components/chat/ChatSidebar";
 import ChatWindow from "../components/chat/ChatWindow";
-import ChatMediaPanel from "../components/chat/ChatMediaPanel";
 
 const Chat = () => {
   return (
@@ -11,8 +10,6 @@ const Chat = () => {
         <ChatSidebar />
         {/* Main Chat Window */}
         <ChatWindow />
-        {/* Media and Attachments */}
-        <ChatMediaPanel />
       </div>
     </>
   );
